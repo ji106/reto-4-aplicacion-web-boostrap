@@ -6,6 +6,81 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    
+    <h2>Añadir videojuego</h2>
+
+    <form action="/add-game" method="post">
+      <label>Título:</label>
+      <input type="text" name="title" required>
+
+      <label>Plataforma:</label>
+      <input type="text" name="platform" required>
+      
+      <label>Género:</label>
+      <input type="text" name="genre" required>
+
+      <label>Estado:</label>
+      <select name="status" id="status">
+        <option value="Pendiente">Pendiente</option>
+        <option value="En progreso">En progreso</option>
+        <option value="Completado">Completado</option>
+      </select>
+
+      <button type="submit">Guardar</button>
+    </form>
+
+    <hr>
+
+    <h2>Filtrar videojuegos</h2>
+
+    <form action="/" method="get">
+      <label>Plataforma:</label>
+      <input type="text" name="platform">
+
+      <label>Género:</label>
+      <input type="text" name="genre">
+
+      <label>Estado:</label>
+      <select name="status">
+        <option value="">Todos</option>
+        <option value="Pendiente">Pendiente</option>
+        <option value="En progreso">En progreso</option>
+        <option value="Completado">Completado</option>
+      </select>
+
+      <button type="submit">Filtrar</button>
+    </form>
+
+    <hr>
+
+    <h2>Mis videojuegos</h2>
+
+    <ul>
+      <% games.forEach(game => { %>
+        <li>
+          <h3><%= game.title %></h3>
+          <p>Plataforma: <%= game.platform %></p>
+          <p>Género: <%= game.genre %></p>
+          <p>Estado: <%= game.status %></p>
+
+          <form action="/update-status" method="post">
+            <input type="hidden" name="id" value="<%= game.id %>">
+
+            <select name="status">
+              <option value="Pendiente">Pendiente</option>
+              <option value="En progreso">En progreso</option>
+              <option value="Completado">Completado</option>
+            </select>
+
+            <button type="submit">Cambiar estado</button>
+          </form>
+
+          <form action="/delete-game" method="post">
+            <input type="hidden" name="id" value="<%= game.id %>">
+            <button type="submit">Eliminar</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
   </body>
 </html>

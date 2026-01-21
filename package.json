@@ -6,11 +6,29 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "better-sqlite3": "^12.6.2",
+    "bootstrap": "^5.3.8",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "^4.0.1",
     "express": "^4.22.1",
+    "express-session": "^1.18.2",
     "http-errors": "~1.6.3",
     "morgan": "^1.10.1"
-  }
+  },
+  "description": "",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ji106/reto-4-aplicacion-web-boostrap.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ji106/reto-4-aplicacion-web-boostrap/issues"
+  },
+  "homepage": "https://github.com/ji106/reto-4-aplicacion-web-boostrap#readme"
 }
