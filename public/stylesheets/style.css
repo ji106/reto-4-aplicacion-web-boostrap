@@ -1,8 +1,205 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #eef1f5;
+  color: #222;
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: #00B7FF;
+nav {
+  background: #ffffff;
+  padding: 15px 25px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #333;
+  }
+
+  a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #0077ff;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+#add {
+  background-color: #fafafa;
+  padding: 40px 25px;
+
+  h2 {
+    text-align: center;
+  }
+
+  form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    margin-top: 18px;
+    padding: 12px;
+    width: 100%;
+    background: #0077ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+#list {
+  background-color: #f0f5ff;
+  padding: 40px 25px;
+
+  h2 {
+    text-align: left;
+    margin-left: 5px;
+  }
+
+  .filter {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  #filter-form {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    width: 100%;
+
+    div {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+
+      label {
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      input, select {
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+    }
+    
+    button {
+      padding: 12px 20px;
+      background: #0077ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    width: 100%;
+
+    .card {
+      background: #fff;
+      padding: 18px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+
+      h3 {
+        margin-top: 0;
+        color: #0077ff;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: bold;
+        margin: 10px 0;
+
+        &.Pendiente {
+          background: #ffe8a3;
+          color: #5b5200;
+        }
+
+        &.En-progreso {
+          background: #cfe0ff;
+          color: #1d3f8b;
+        }
+        
+        &.Completado {
+          background: #c9f5d4;
+          color: #0f5a1a;
+        }
+      }
+
+      .actions {
+        form {
+          margin-top: 10px;
+
+          select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+          }
+
+          button {
+            margin-top: 8px;
+            padding: 10px;
+            width: 100%;
+            background: #0077ff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+          }
+
+          .delete {
+            background: #ff4d4d;
+          }
+        }
+      }
+    }
+  }
+
 }
