@@ -5,18 +5,40 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <header>
+      <nav>
+        <div class="nav-left">
+          <a href="index.ejs">
+            <h1><%= title %></h1>
+          </a>
+        </div>
+        
+        <div class="nav-center">
+          <ul>
+            <li><a href="#add">Añadir videojuego</a></li>
+            <li><a href="#list">Mis videojuegos</a></li>
+          </ul>
+        </div>
+  
+        <div class="nav-right">
+          <div class="logout">
+            <a href="/users/logout">Salir</a>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-    <nav>
-      <h1><%= title %></h1>
-
-      <div>
-        <a href="#add">Añadir videojuego</a>
-        <a href="#list">Mis videojuegos</a>
-        <a href="/users/logout">Salir</a>
+    <section class="hero-banner">
+      <img class="hero-bg" src="https://uiparadox.co.uk/templates/pyxel/v3/assets/media/hero/hero-large.png" alt="hero-large">
+      <div class="hero-content">
+        <h2>¡Bienvenido/a a tu Zona Gamer!</h2>
+        <p>
+          Aquí podrás gestionar y llevar el control de tu colección de videojuegos como un auténtico pro. Añade, filtra y organiza tus títulos favoritos; ¡mantén tu backlog bajo control y presume tu progreso como todo un gamer legendario! 
+        </p>
       </div>
-    </nav>
+    </section>
 
-    <section id="add">
+    <section class="add">
       <h2>Añadir videojuego</h2>
 
       <form action="/add-game" method="post">
@@ -40,7 +62,7 @@
       </form>
     </section>
 
-    <section id="list">
+    <section class="list">
       <h2>Mis videojuegos</h2>
 
       <div class="filter">
@@ -73,8 +95,7 @@
           <div class="card">
             <h3><%= game.title %></h3>
 
-            <p><strong>Plataforma:</strong> <%= game.platform %></p>
-            <p><strong>Género:</strong> <%= game.genre %></p>
+            <p class="tags"><%= game.platform %> | <%= game.genre %></p>
             <span class="status <%= game.status.replace(' ', '-') %>"><%= game.status %></span>
 
             <div class="actions">
