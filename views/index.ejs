@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
+  <body class="index-body">
     <header>
-      <nav>
+      <nav class="d-flex justify-content-between align-items-center" style="background: #000; padding: 30px 60px;">
         <div class="nav-left">
-          <a href="index.ejs">
+          <a href="/">
             <h1><%= title %></h1>
           </a>
         </div>
         
-        <div class="nav-center">
-          <ul>
+        <div class="nav-center flex-grow-1 d-flex justify-content-center align-items-center">
+          <ul class="d-flex gap-5 list-unstyled m-0 p-0">
             <li><a href="#add">Añadir videojuego</a></li>
             <li><a href="#list">Mis videojuegos</a></li>
           </ul>
@@ -28,7 +33,7 @@
       </nav>
     </header>
 
-    <section class="hero-banner">
+    <section class="hero-banner d-flex align-items-center">
       <img class="hero-bg" src="https://uiparadox.co.uk/templates/pyxel/v3/assets/media/hero/hero-large.png" alt="hero-large">
       <div class="hero-content">
         <h2>¡Bienvenido/a a tu Zona Gamer!</h2>
@@ -38,80 +43,89 @@
       </div>
     </section>
 
-    <section class="add">
+    <section class="add" id="add">
       <h2>Añadir videojuego</h2>
 
-      <form action="/add-game" method="post">
-        <label>Título:</label>
-        <input type="text" name="title" required>
+      <form action="/add-game" method="post" class="mx-auto p-4 rounded-3" style="max-width: 600px; background: #111; border: 1px solid #333;">
+        <label class="form-label mt-3">Título:</label>
+        <input type="text" name="title" required class="form-control">
   
-        <label>Plataforma:</label>
-        <input type="text" name="platform" required>
+        <label class="form-label mt-3">Plataforma:</label>
+        <input type="text" name="platform" required class="form-control">
         
-        <label>Género:</label>
-        <input type="text" name="genre" required>
+        <label class="form-label mt-3">Género:</label>
+        <input type="text" name="genre" required class="form-control">
   
-        <label>Estado:</label>
-        <select name="status">
+        <label class="form-label mt-3">Estado:</label>
+        <select name="status" class="form-select">
           <option value="Pendiente">Pendiente</option>
           <option value="En progreso">En progreso</option>
           <option value="Completado">Completado</option>
         </select>
   
-        <button type="submit">Guardar</button>
+        <button type="submit" class="btn w-100 mt-4" style="background: #1698bb; color: #fff; border: none; border-radius: 8px; font-weight: bold;">Guardar</button>
       </form>
     </section>
 
-    <section class="list">
-      <h2>Mis videojuegos</h2>
+    <section class="list" id="list">
+      <h2 class="mb-4">Mis videojuegos</h2>
 
       <div class="filter">
-        <form action="/" method="get" id="filter-form">
-          <div>
-            <label>Plataforma:</label>
-            <input type="text" name="platform">
+        <form action="/" method="get" id="filter-form" class="d-flex flex-nowrap gap-4 align-items-center p-4 rounded-3" style="background: #111; border: 1px solid #333;">
+          <div class="d-flex align-items-center gap-2 flex-grow-1">
+            <label class="fw-bold">Plataforma:</label>
+            <input type="text" name="platform" class="form-control">
           </div>
           
-          <div>
-            <label>Género:</label>
-            <input type="text" name="genre">
+          <div class="d-flex align-items-center gap-2 flex-grow-1">
+            <label class="fw-bold">Género:</label>
+            <input type="text" name="genre" class="form-control">
           </div>
-          <div>
-            <label>Estado:</label>
-            <select name="status">
+          <div class="d-flex align-items-center gap-2 flex-grow-1">
+            <label class="fw-bold">Estado:</label>
+            <select name="status" class="form-select">
               <option value="">Todos</option>
               <option value="Pendiente">Pendiente</option>
               <option value="En progreso">En progreso</option>
               <option value="Completado">Completado</option>
             </select>
           </div>
+
+          <div class="d-flex align-items-center gap-2">
+            <label class="fw-bold">Favoritos:</label>
+            <input type="checkbox" name="onlyFavs" id="onlyFavs">
+          </div>
   
-          <button type="submit">Filtrar</button>
+          <button type="submit" class="btn" style="background: #1698bb; color: #fff; border: none; border-radius: 8px;">Filtrar</button>
         </form>
       </div>
 
-      <div class="container">
-        <% games.forEach(game => { %>
-          <div class="card">
-            <h3><%= game.title %></h3>
-
+      <div class="container mt-4">
+        <% games.forEach((game, index) => { %>
+          <div class="card p-3 rounded-3" data-order="<%= index %>" style="background: #111; border: 1px solid #333;">
+            <input type="hidden" class="card-id" value="<%= game.id %>">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h3 class="m-0"><%= game.title %></h3>
+              <button type="button" class="btn btn-sm btn-ouline-warning toggle-fav mb-2" data-id="<%= game.id %>">★</button>
+            </div>
+            
             <p class="tags"><%= game.platform %> | <%= game.genre %></p>
             <span class="status <%= game.status.replace(' ', '-') %>"><%= game.status %></span>
 
-            <div class="actions">
-              <form action="/update-status" method="post">
+            <div class="actions mt-3">
+              <form action="/update-status" method="post" class="mb-3">
                 <input type="hidden" name="id" value="<%= game.id %>">
-                <select name="status">
+                <select name="status" class="form-select mb-2">
                   <option value="Pendiente">Pendiente</option>
                   <option value="En progreso">En progreso</option>
                   <option value="Completado">Completado</option>
                 </select>
-                <button type="submit">Cambiar estado</button>
+                <button type="submit" class="btn w-100" style="background: #1698bb; color: #fff; border: none; border-radius: 6px;">Cambiar estado</button>
               </form>
 
               <form action="/delete-game" method="post">
                 <input type="hidden" name="id" value="<%= game.id %>">
-                <button type="submit">Eliminar</button>
+                <button type="submit" class="btn w-100" style="background: #ff4d4d; border: none; border-radius: 6px;">Eliminar</button>
               </form>
             </div>
           </div>
@@ -120,4 +134,6 @@
     </section>
 
   </body>
+
+  <script src="/javascripts/main.js"></script>
 </html>
